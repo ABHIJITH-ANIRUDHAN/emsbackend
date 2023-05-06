@@ -1,14 +1,16 @@
 require('dotenv').config()
-const express =require ("express")
-const cors=require("cors")
-const app=express()
+const express = require('express')
+const cors = require('cors')
+const router = require('./routes/router')
 require('./db/connection')
-const PORT= process.env.PORT || 4000
-app.use(cors())
-app.use(express.json())
-app.get('/',(req,res)=>{
-    res.send('EMS Server Started!!!')
+const server = express()
+const PORT = process.env.PORT || 4000
+server.use(cors())
+server.use(express.json())
+server.use(router)
+server.get('/',(req,res)=>{
+    res.send('EMS server started !!')
 })
-app.listen(PORT,()=>{
-    console.log(`Ems Server started at ${PORT}`);
+server.listen(PORT,()=>{
+    console.log(`EMS Server Started at the port ${PORT}`);
 })
